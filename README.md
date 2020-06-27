@@ -1,6 +1,6 @@
-# TypeScript project template
+# gen_avatar
 
-This is a TypeScript project template using `gulp`, `browserify` and `prettier`.
+This is a avatar generator.
 
 ## To Install Development Dependencies
 
