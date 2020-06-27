@@ -1,0 +1,13 @@
+{
+  "folders": [
+    {
+      "path": ".."
+    }
+  ],
+  "settings": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "prettier.tabWidth": 2,
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true
+  }
+}

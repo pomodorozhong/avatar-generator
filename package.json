@@ -1,0 +1,21 @@
+{
+  "name": "template_for_mvp",
+  "version": "1.0.0",
+  "description": "This is a Template of MVP architecture implemented in TypeScript.",
+  "main": "./dist/bundle.js",
+  "devDependencies": {
+    "browserify": "^16.5.1",
+    "gulp": "^4.0.2",
+    "gulp-typescript": "^6.0.0-alpha.1",
+    "gulp-util": "^3.0.8",
+    "prettier": "^2.0.5",
+    "tsify": "^4.0.1",
+    "typescript": "^3.8.3",
+    "vinyl-source-stream": "^2.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
