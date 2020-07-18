@@ -9,7 +9,7 @@
 #frame {
     margin: auto;
     margin-top: 50px;
-    width: 80%;
+    width: 720px;
     height: 500px;
 
     padding: 5px;
@@ -26,7 +26,7 @@
 }
 
 #left_panel {
-    width: 30%;
+    width: 200px;
 
     border-color: #999999;
     border-style: solid;
@@ -34,4 +34,8 @@
 }
 #right_panel {
     width: 70%;
+}
+
+canvas {
+    margin-left: auto;
 }
