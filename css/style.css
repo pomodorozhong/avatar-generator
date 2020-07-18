@@ -1,0 +1,43 @@
+* {
+    box-sizing: border-box;
+    font-family: sans-serif;
+    line-height: 1.6em;
+    padding: 0;
+    margin: 0;
+}
+
+#frame {
+    margin: auto;
+    margin-top: 50px;
+    width: 80%;
+    height: 500px;
+
+    padding: 5px;
+
+    border-color: #aaaaaa;
+    border-style: solid;
+    border-radius: 5px;
+}
+
+body {
+    /* background-color: #236449; */
+}
+
+#left_panel,
+#right_panel {
+    float: left;
+    height: 100%;
+}
+
+#left_panel {
+    width: 30%;
+
+    border-color: #999999;
+    border-style: solid;
+    border-radius: 5px;
+    /* background-color: yellow; */
+}
+#right_panel {
+    width: 70%;
+    /* background-color: blue; */
+}
