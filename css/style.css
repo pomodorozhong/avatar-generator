@@ -19,10 +19,6 @@
     border-radius: 5px;
 }
 
-body {
-    /* background-color: #236449; */
-}
-
 #left_panel,
 #right_panel {
     float: left;
@@ -35,9 +31,7 @@ body {
     border-color: #999999;
     border-style: solid;
     border-radius: 5px;
-    /* background-color: yellow; */
 }
 #right_panel {
     width: 70%;
-    /* background-color: blue; */
 }
