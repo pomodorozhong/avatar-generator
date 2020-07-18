@@ -7,10 +7,13 @@ export class View {
         this.canvas.width = size;
         this.canvas.height = size;
 
+        this.hookEventListeners();
+    }
+
+    hookEventListeners() {
+        document.getElementById("btn_generate").addEventListener("click", draw);
+
         let self = this;
-
-        draw();
-
         function draw() {
             let ctx = self.canvas.getContext("2d");
 
