@@ -7,7 +7,17 @@ export class View {
         this.canvas.width = size;
         this.canvas.height = size;
 
+        this.initialPatternSelection();
         this.hookEventListeners();
+    }
+
+    initialPatternSelection() {
+        let input: HTMLInputElement = <HTMLInputElement>(
+            document.getElementById("ddl_select_pattern")
+        );
+        var opt = document.createElement("option");
+        opt.appendChild(document.createTextNode("Cross"));
+        input.appendChild(opt);
     }
 
     hookEventListeners() {
