@@ -1,6 +1,6 @@
-# gen_avatar
+# Avatar Generator
 
-This is a avatar generator.
+This is a avatar generator using Procedural Content Generation (PCG).
 
 ## To Install Development Dependencies
 
