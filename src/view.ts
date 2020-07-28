@@ -48,5 +48,7 @@ export class View {
 
     settingHandler(setting) {
         console.log("settingHandler()  not implemented");
+
+        // TODO: using setting to generate all kinds of input element
     }
 }
