@@ -1,6 +1,10 @@
+import { Presenter } from "./presenter";
+
 export class View {
+    presenter: Presenter;
     canvas: HTMLCanvasElement;
-    constructor() {
+    constructor(presenter:Presenter) {
+        this.presenter = presenter;
         this.canvas = document.getElementsByTagName("canvas")[0];
 
         let size: number = 480;
