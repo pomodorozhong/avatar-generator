@@ -3,7 +3,7 @@ import { Presenter } from "./presenter";
 export class View {
     presenter: Presenter;
     canvas: HTMLCanvasElement;
-    constructor(presenter:Presenter) {
+    constructor(presenter: Presenter) {
         this.presenter = presenter;
         this.canvas = document.getElementsByTagName("canvas")[0];
 
@@ -19,9 +19,22 @@ export class View {
         let input: HTMLInputElement = <HTMLInputElement>(
             document.getElementById("ddl_select_pattern")
         );
-        var opt = document.createElement("option");
-        opt.appendChild(document.createTextNode("Cross"));
-        input.appendChild(opt);
+        input.addEventListener("change", pattern_selected, false);
+
+        let pattern_list = this.presenter.getPatternList();
+        for (let index = 0; index < pattern_list.length; index++) {
+            const pattern = pattern_list[index];
+            var opt = document.createElement("option");
+            opt.appendChild(document.createTextNode(pattern));
+            input.appendChild(opt);
+        }
+
+        let self = this;
+        function pattern_selected(e: any) {
+            let pattern = e.target.value;
+            let setting = self.presenter.getPatternSetting(pattern);
+            self.settingHandler(setting);
+        }
     }
 
     hookEventListeners() {
@@ -29,31 +42,11 @@ export class View {
 
         let self = this;
         function draw() {
-            let ctx = self.canvas.getContext("2d");
-
-            ctx.fillStyle = "white";
-            ctx.fillRect(0, 0, 480, 480);
-
-            let width = 50;
-            let height = width;
-
-            let x = 50;
-            let y = 50;
-            // upper left to lower right
-            for (let index = 0; index < 34; index++) {
-                ctx.strokeRect(x, y, width, height);
-                x += 10;
-                y += 10;
-            }
-
-            x = 50;
-            y = 480 - 100;
-            // upper left to lower right
-            for (let index = 0; index < 34; index++) {
-                ctx.strokeRect(x, y, width, height);
-                x += 10;
-                y -= 10;
-            }
+            self.presenter.draw(self.canvas);
         }
+    }
+
+    settingHandler(setting) {
+        console.log("settingHandler()  not implemented");
     }
 }
