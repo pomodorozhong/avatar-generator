@@ -1,3 +1,3 @@
-import { View } from "./view";
+import { Presenter } from "./presenter";
 
-let view = new View();
+let presenter = new Presenter();

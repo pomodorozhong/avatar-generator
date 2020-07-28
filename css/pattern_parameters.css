@@ -1,0 +1,17 @@
+.parameters {
+    margin: auto;
+    display: block;
+    margin-top: 10px;
+    width: 80%;
+}
+.parameters > a {
+    font-size: 12px;
+}
+
+select {
+    height: 30px;
+    width: 100%;
+
+    border-radius: 3px;
+    border-style: solid;
+}

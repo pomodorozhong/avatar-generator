@@ -5,15 +5,16 @@
 #btn_generate {
     margin: auto;
     display: block;
-    margin-top: 10px;
-    width:80%;
-    
+    width: 80%;
+    bottom: 10px;
+    left: 10%;
+
     border-radius: 3px;
     border-style: solid;
 
     cursor: pointer;
     border: none;
-    position: relative;
+    position: absolute;
     overflow: hidden;
 
     margin-top: 1em;
@@ -29,7 +30,7 @@
 
 #btn_generate:hover {
     box-shadow: 0px 1px 5px 1px #a9b1b9;
-    color: #FFFFFF;
+    color: #ffffff;
 }
 
 #btn_generate:after {
@@ -42,12 +43,12 @@
     margin-left: -20px !important;
     margin-top: -120%;
     opacity: 0;
-    transition: all 0.8s
+    transition: all 0.8s;
 }
 
 #btn_generate:active:after {
     padding: 0;
     margin: 0;
     opacity: 1;
-    transition: 0s
+    transition: 0s;
 }
