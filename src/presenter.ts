@@ -34,7 +34,7 @@ export class Presenter {
 
         x = 50;
         y = 480 - 100;
-        // upper left to lower right
+        // lower left to upper right
         for (let index = 0; index < 34; index++) {
             ctx.strokeRect(x, y, width, height);
             x += 10;
