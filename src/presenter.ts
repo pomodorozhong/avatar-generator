@@ -10,6 +10,10 @@ export class Presenter {
         this.view = new View(this);
     }
 
+    selectPattern(selection: string) {
+        this.patternManager.selected = selection;
+    }
+
     getPatternList(): Array<string> {
         return this.patternManager.patternNames;
     }

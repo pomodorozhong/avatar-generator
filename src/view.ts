@@ -32,6 +32,8 @@ export class View {
         let self = this;
         function pattern_selected(e: any) {
             let pattern = e.target.value;
+            self.presenter.selectPattern(pattern);
+            
             let setting = self.presenter.getPatternSetting(pattern);
             self.settingHandler(setting);
         }
