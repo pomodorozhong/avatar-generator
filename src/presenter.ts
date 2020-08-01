@@ -1,44 +1,24 @@
 import { View } from "./view";
+import { PatternManager } from "./patternManager";
 
 export class Presenter {
     view: View;
+    patternManager: PatternManager;
 
     constructor() {
+        this.patternManager = new PatternManager();
         this.view = new View(this);
     }
 
     getPatternList(): Array<string> {
-        let list: Array<string> = ["Cross", "Cross'"];
-        return list;
+        return this.patternManager.patternNames;
     }
-    getPatternSetting(pattern: string) {
-        console.log(pattern + " pattern's setting not implemented");
+
+    getPatternSetting(patternName: string): Record<string, any> {
+        return this.patternManager.selectedSetting;
     }
+
     draw(canvas: HTMLCanvasElement) {
-        let ctx = canvas.getContext("2d");
-
-        ctx.fillStyle = "white";
-        ctx.fillRect(0, 0, 480, 480);
-
-        let width = 50;
-        let height = width;
-
-        let x = 50;
-        let y = 50;
-        // upper left to lower right
-        for (let index = 0; index < 34; index++) {
-            ctx.strokeRect(x, y, width, height);
-            x += 10;
-            y += 10;
-        }
-
-        x = 50;
-        y = 480 - 100;
-        // lower left to upper right
-        for (let index = 0; index < 34; index++) {
-            ctx.strokeRect(x, y, width, height);
-            x += 10;
-            y -= 10;
-        }
+        this.patternManager.draw(canvas);
     }
 }
