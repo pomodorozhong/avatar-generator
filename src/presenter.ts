@@ -18,7 +18,7 @@ export class Presenter {
         return this.patternManager.patternNames;
     }
 
-    getPatternSetting(patternName: string): Record<string, any> {
+    getSelectedPatternSetting(): Record<string, any> {
         return this.patternManager.selectedSetting;
     }
 

@@ -34,7 +34,7 @@ export class View {
             let pattern = e.target.value;
             self.presenter.selectPattern(pattern);
             
-            let setting = self.presenter.getPatternSetting(pattern);
+            let setting = self.presenter.getSelectedPatternSetting();
             self.settingHandler(setting);
         }
     }
