@@ -6,6 +6,11 @@ export class Cross implements IPattern {
 
     constructor() {
         this.name = "Cross";
+        this.settings = {
+            randomness: 0,
+        };
+
+        this.settings["randomness"] = 3;
     }
 
     draw(canvas: HTMLCanvasElement) {
@@ -17,22 +22,49 @@ export class Cross implements IPattern {
         let width = 50;
         let height = width;
 
-        let x = 50;
-        let y = 50;
+        let x = 100;
+        let y = 100;
         // upper left to lower right
-        for (let index = 0; index < 34; index++) {
-            ctx.strokeRect(x, y, width, height);
+        for (let index = 0; index < 24; index++) {
+            let randOffestX = this.calcOffest(x);
+            let randOffestY = this.calcOffest(y);
+            ctx.strokeRect(x + randOffestX, y + randOffestY, width, height);
             x += 10;
             y += 10;
         }
 
-        x = 50;
-        y = 480 - 100;
+        x = 100;
+        y = 480 - 150;
         // lower left to upper right
-        for (let index = 0; index < 34; index++) {
-            ctx.strokeRect(x, y, width, height);
+        for (let index = 0; index < 24; index++) {
+            let randOffestX = this.calcOffest(x);
+            let randOffestY = this.calcOffest(y);
+            ctx.strokeRect(x + randOffestX, y + randOffestY, width, height);
             x += 10;
             y -= 10;
         }
+    }
+
+    calcOffest(coordination: number): number {
+        let centerCalibration = this.centerPrecisionCoeff(coordination);
+        let randOffest = 40 * Math.random() * centerCalibration;
+
+        if (Math.random() < 0.5) {
+            randOffest *= -1;
+        }
+
+        return randOffest;
+    }
+
+    centerPrecisionCoeff(coordination: number): number {
+        let width = 50;
+
+        let center = 480 / 2;
+        let boxCenter = coordination + width / 2;
+        let maxOffset = center;
+        let offset = Math.abs(boxCenter - center);
+
+        let coeff = (offset / maxOffset) * this.settings["randomness"];
+        return coeff;
     }
 }
