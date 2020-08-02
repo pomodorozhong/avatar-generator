@@ -1,44 +1,37 @@
 import { View } from "./view";
+import { PatternManager } from "./patternManager";
 
 export class Presenter {
-    view: View;
+  view: View;
+  patternManager: PatternManager;
 
-    constructor() {
-        this.view = new View(this);
-    }
+  constructor() {
+    this.patternManager = new PatternManager();
+    this.view = new View(this);
+  }
 
-    getPatternList(): Array<string> {
-        let list: Array<string> = ["Cross", "Cross'"];
-        return list;
-    }
-    getPatternSetting(pattern: string) {
-        console.log(pattern + " pattern's setting not implemented");
-    }
-    draw(canvas: HTMLCanvasElement) {
-        let ctx = canvas.getContext("2d");
+  selectPattern(selection: string) {
+    this.patternManager.selected = selection;
+  }
 
-        ctx.fillStyle = "white";
-        ctx.fillRect(0, 0, 480, 480);
+  getPatternList(): Array<string> {
+    return this.patternManager.patternNames;
+  }
 
-        let width = 50;
-        let height = width;
+  getSelectedPatternName(): string {
+    return this.patternManager.selected;
+  }
 
-        let x = 50;
-        let y = 50;
-        // upper left to lower right
-        for (let index = 0; index < 34; index++) {
-            ctx.strokeRect(x, y, width, height);
-            x += 10;
-            y += 10;
-        }
+  getSelectedPatternSetting(): Record<string, any> {
+    return this.patternManager.selectedSetting;
+  }
 
-        x = 50;
-        y = 480 - 100;
-        // lower left to upper right
-        for (let index = 0; index < 34; index++) {
-            ctx.strokeRect(x, y, width, height);
-            x += 10;
-            y -= 10;
-        }
-    }
+  setSelectedPatternSetting(settingName: string, value: any) {
+    this.patternManager.selectedSetting[settingName] = value;
+    // TODO: error handling
+  }
+
+  draw(canvas: HTMLCanvasElement) {
+    this.patternManager.draw(canvas);
+  }
 }
