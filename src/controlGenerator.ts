@@ -45,6 +45,13 @@ export class ControlGenerator {
           );
           select.appendChild(opt);
         }
+        let default_value = settings[key];
+        for (let index = 0; index < select.options.length; index++) {
+          const opt: HTMLOptionElement = select.options[index];
+          if (default_value == index) {
+            opt.selected = true;
+          }
+        }
         container.appendChild(select);
 
         let self = this;
