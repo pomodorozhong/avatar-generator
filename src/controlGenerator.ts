@@ -38,7 +38,7 @@ export class ControlGenerator {
 
         let select = document.createElement("select");
         let max_randomness = 4;
-        for (let index = 1; index <= max_randomness; index++) {
+        for (let index = 0; index <= max_randomness; index++) {
           let opt = document.createElement("option");
           opt.appendChild(
             document.createTextNode((index as unknown) as string)
