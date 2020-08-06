@@ -1,43 +1,48 @@
 * {
-    box-sizing: border-box;
-    font-family: sans-serif;
-    line-height: 1.6em;
-    font-size: 14px;
-    padding: 0;
-    margin: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+  line-height: 1.6em;
+  font-size: 14px;
+  padding: 0;
+  margin: 0;
 }
 
 #frame {
-    margin: auto;
-    margin-top: 50px;
-    width: 720px;
-    height: 500px;
+  margin: auto;
+  width: 100%;
 
-    padding: 5px;
+  padding: 5px;
 
-    border-color: #aaaaaa;
-    border-style: solid;
-    border-radius: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  flex-direction: row;
+  max-width: 750px;
 }
 
-#left_panel,
-#right_panel {
-    position: relative;
-    float: left;
-    height: 100%;
+#frame > div {
+  margin-top: 1em;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+
+  border-color: #999999;
+  border-style: solid;
 }
 
 #left_panel {
-    width: 200px;
 
-    border-color: #999999;
-    border-style: solid;
-    border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 200px;
 }
 #right_panel {
-    width: 70%;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 480px;
 }
 
 canvas {
-    margin-left: auto;
+  width: 100%;
 }
