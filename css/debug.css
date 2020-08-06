@@ -2,6 +2,11 @@
 body {
     background-color: #236449;
 }
+#frame {
+    border-color: #aaaaaa;
+    border-style: solid;
+    border-radius: 5px;
+}
 #left_panel {
     background-color: yellow;
 }
