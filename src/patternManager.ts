@@ -1,7 +1,12 @@
 import { IPattern } from "./patterns/pattern.interface";
 import { Cross } from "./patterns/cross";
+import { CubicDisarray } from "./patterns/cubicDisarray";
 
-const patternName = ["Cross"] as const;
+const patternName = [
+    "CubicDisarray",
+    "Cross",
+    // placeholder
+] as const;
 export type PatternName = typeof patternName[number];
 
 export class PatternManager {
@@ -28,6 +33,7 @@ export class PatternManager {
     initPatterns() {
         this.patterns = {
             Cross: new Cross(),
+            CubicDisarray: new CubicDisarray(),
         };
     }
 
