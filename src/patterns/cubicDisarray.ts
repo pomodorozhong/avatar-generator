@@ -28,6 +28,7 @@ export class CubicDisarray implements IPattern {
     var rotateMultiplier = 20;
     var offset = 10;
     var squareNumOneRow = this.settings["compactness"];
+    squareNumOneRow = parseInt(squareNumOneRow) + 1;
     var squareSize = (size - 2 * offset) / squareNumOneRow;
 
     function drawRect(width, height) {
