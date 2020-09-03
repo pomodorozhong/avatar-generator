@@ -39,10 +39,10 @@ export class CubicDisarray implements IPattern {
     let xLimit = size - squareSize - offset;
     let yLimit = size - squareSize - offset;
     for (var x = squareSize; x <= xLimit; x += squareSize) {
-      for (var j = squareSize; j <= yLimit; j += squareSize) {
+      for (var y = squareSize; y <= yLimit; y += squareSize) {
         var plusOrMinus = Math.random() < 0.5 ? -1 : 1;
         var rotateAmt =
-          (((j / size) * Math.PI) / 180) *
+          (((y / size) * Math.PI) / 180) *
           plusOrMinus *
           Math.random() *
           this.settings["randomness"] *
@@ -50,14 +50,14 @@ export class CubicDisarray implements IPattern {
 
         plusOrMinus = Math.random() < 0.5 ? -1 : 1;
         var translateAmt =
-          (j / size) *
+          (y / size) *
           plusOrMinus *
           Math.random() *
           this.settings["randomness"] *
           randomDisplacement;
 
         ctx.save();
-        ctx.translate(x + translateAmt + offset, j + offset);
+        ctx.translate(x + translateAmt + offset, y + offset);
         ctx.rotate(rotateAmt);
         drawRect(squareSize, squareSize);
         ctx.restore();
