@@ -1,21 +1,17 @@
 {
-  "name": "template_for_mvp",
-  "version": "1.0.0",
-  "description": "This is a Template of MVP architecture implemented in TypeScript.",
-  "main": "./dist/bundle.js",
-  "devDependencies": {
-    "browserify": "^16.5.1",
-    "gulp": "^4.0.2",
-    "gulp-typescript": "^6.0.0-alpha.1",
-    "gulp-util": "^3.0.8",
-    "prettier": "^2.0.5",
-    "tsify": "^4.0.1",
-    "typescript": "^3.8.3",
-    "vinyl-source-stream": "^2.0.0"
-  },
+  "name": "avatar-generator",
+  "version": "1.1.0",
+  "description": "",
+  "main": "main.js",
   "scripts": {
+    "dev": "npx parcel src/index.html --open",
+    "build": "npx parcel build src/index.html --no-source-maps --public-url ./",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "pomodorozhong",
+  "license": "MIT",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4",
+    "typescript": "^3.7.5"
+  }
 }
