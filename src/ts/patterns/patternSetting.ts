@@ -18,16 +18,12 @@ export class PatternSettingOption {
         switch (type) {
             case "numeric_range":
                 if (range == undefined) {
-                    throw new Error(
-                        "'numeric_range' type is selected, but 'range' undefined."
-                    );
+                    throw new Error("'numeric_range' type is selected, but 'range' undefined.");
                 }
                 break;
             case "string":
                 if (string_pool == undefined) {
-                    throw new Error(
-                        "'string' type is selected, but 'string_pool' undefined."
-                    );
+                    throw new Error("'string' type is selected, but 'string_pool' undefined.");
                 }
                 break;
 
@@ -81,7 +77,7 @@ export class PatternSetting {
             throw new Error(`${optionName} is not an option.`);
         }
     }
-    getOptions(): Array<PatternSettingOption>| undefined {
+    getOptions(): Array<PatternSettingOption> | undefined {
         return this.options;
     }
 }
