@@ -1,6 +1,7 @@
 import { IPattern } from "./patterns/pattern.interface";
 import { Cross } from "./patterns/cross";
 import { CubicDisarray } from "./patterns/cubicDisarray";
+import { PatternSetting } from "./patterns/patternSetting";
 
 const patternName = [
     "CubicDisarray",
@@ -19,7 +20,7 @@ export class PatternManager {
     get selected(): string {
         return this._selected;
     }
-    get selectedSetting(): Record<string, any> {
+    get selectedSetting(): PatternSetting {
         return this.patterns[this.selected].settings;
     }
 

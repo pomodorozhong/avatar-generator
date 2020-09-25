@@ -1,5 +1,6 @@
 import { View } from "./view";
 import { PatternManager } from "./patternManager";
+import { PatternSetting } from "./patterns/patternSetting";
 
 export class Presenter {
   view: View;
@@ -22,12 +23,12 @@ export class Presenter {
     return this.patternManager.selected;
   }
 
-  getSelectedPatternSetting(): Record<string, any> {
+  getSelectedPatternSetting(): PatternSetting {
     return this.patternManager.selectedSetting;
   }
 
-  setSelectedPatternSetting(settingName: string, value: any) {
-    this.patternManager.selectedSetting[settingName] = value;
+  setSelectedPatternSetting(settingName: string, value: any): void {
+    this.patternManager.selectedSetting.setValue(settingName, value);
     // TODO: error handling
   }
 

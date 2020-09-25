@@ -1,16 +1,16 @@
 import { IPattern } from "./pattern.interface";
+import { PatternSetting, PatternSettingOption } from "./patternSetting";
 
 export class Cross implements IPattern {
     name: string;
-    settings: Record<string, any>;
+    settings: PatternSetting;
 
     constructor() {
         this.name = "Cross";
-        this.settings = {
-            randomness: 0,
-        };
-
-        this.settings["randomness"] = 3;
+        this.settings = new PatternSetting();
+        this.settings.addOption(
+            new PatternSettingOption("randomness", "numeric_range", 3, [0, 4, 1])
+        );
     }
 
     draw(canvas: HTMLCanvasElement) {
@@ -64,7 +64,7 @@ export class Cross implements IPattern {
         let maxOffset = center;
         let offset = Math.abs(boxCenter - center);
 
-        let coeff = (offset / maxOffset) * this.settings["randomness"];
+        let coeff = (offset / maxOffset) * this.settings.getValue("randomness");
         return coeff;
     }
 }
