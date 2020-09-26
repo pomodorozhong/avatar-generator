@@ -2,6 +2,8 @@
 
 This is a avatar generator using Procedural Content Generation (PCG).
 
+[Click here](https://pomodorozhong.github.io/avatar-generator/) to see the live demo.
+
 ## Installation
 
 ```sh
