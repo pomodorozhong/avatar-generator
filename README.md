@@ -7,6 +7,8 @@ This is a avatar generator using Procedural Content Generation (PCG).
 ## Installation
 
 ```sh
+git clone https://github.com/pomodorozhong/avatar-generator.git
+cd avatar-generator
 npm install
 ```
 
