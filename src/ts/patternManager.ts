@@ -2,10 +2,12 @@ import { IPattern } from "./patterns/pattern.interface";
 import { Cross } from "./patterns/cross";
 import { CubicDisarray } from "./patterns/cubicDisarray";
 import { PatternSetting } from "./patterns/patternSetting";
+import { TriangularMesh } from "./patterns/triangularMesh";
 
 const patternName = [
     "CubicDisarray",
     "Cross",
+    "TriangularMesh",
     // placeholder
 ] as const;
 export type PatternName = typeof patternName[number];
@@ -35,6 +37,7 @@ export class PatternManager {
         this.patterns = {
             Cross: new Cross(),
             CubicDisarray: new CubicDisarray(),
+            TriangularMesh: new TriangularMesh(),
         };
     }
 
