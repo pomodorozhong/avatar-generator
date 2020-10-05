@@ -49,20 +49,22 @@ export class ControlGenerator {
         if (start === undefined || end === undefined || step === undefined) {
             throw new Error(`${option.name}'s range is bad`);
         }
-        for (let index = start; index <= end; index += step) {
+        for (let value = start; value <= end; value += step) {
             // round to first place after decimal
-            index = Math.round(index * 10) / 10;
+            value = Math.round(value * 10) / 10;
 
             let opt = document.createElement("option");
-            opt.appendChild(document.createTextNode((index as unknown) as string));
+            opt.text = (value as unknown) as string;
             select.appendChild(opt);
         }
-        let default_value: number = option.value;
-        for (let index = start; index <= end; index += step) {
+        let default_value: string = option.value;
+        let index = 0;
+        for (let value = start; value <= end; value += step) {
             const opt: HTMLOptionElement = select.options[index];
-            if (default_value == index) {
+            if (default_value == opt.text) {
                 opt.selected = true;
             }
+            index++;
         }
         container.appendChild(select);
 
