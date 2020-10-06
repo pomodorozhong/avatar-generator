@@ -1,30 +1,28 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <link rel="stylesheet" type="text/css" href="css/button.css" />
+        <link rel="stylesheet" type="text/css" href="css/pattern_parameters.css" />
+        <!-- <link rel="stylesheet" type="text/css" href="css/debug.css"> -->
+        <!-- <title>title goes here</title> -->
+    </head>
 
-<head>
-    <meta charset='utf-8'>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="css/button.css">
-    <link rel="stylesheet" type="text/css" href="css/pattern_parameters.css">
-    <!-- <link rel="stylesheet" type="text/css" href="css/debug.css"> -->
-    <!-- <title>title goes here</title> -->
-</head>
-
-<body>
-    <div id="frame">
-        <div id="left_panel">
-            <div class="parameters">
-                <label for="ddl_select_pattern"><span>Pattern</span></label>
-                <select id="ddl_select_pattern"></select>
-                <div id="setting_container"></div>
+    <body>
+        <div id="frame">
+            <div id="left_panel">
+                <div class="parameters">
+                    <label for="ddl_select_pattern"><span>Pattern</span></label>
+                    <select id="ddl_select_pattern"></select>
+                    <div id="setting_container"></div>
+                </div>
+                <button id="btn_generate">Generate!</button>
             </div>
-            <button id="btn_generate">Generate!</button>
+            <div id="right_panel"><canvas></canvas></div>
         </div>
-        <div id="right_panel"><canvas></canvas></div>
-    </div>
-    <script src='./ts/github_corner.ts'></script>
-    <script src='./ts/main.ts'></script>
-</body>
-
+        <script src="./ts/github_corner.ts"></script>
+        <script src="./ts/main.ts"></script>
+    </body>
 </html>
