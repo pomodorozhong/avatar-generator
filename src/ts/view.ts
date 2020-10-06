@@ -44,10 +44,21 @@ export class View {
 
     hookEventListeners() {
         document.getElementById("btn_generate").addEventListener("click", draw);
+        this.canvas.addEventListener("click", download);
 
         let self = this;
         function draw() {
             self.presenter.draw(self.canvas);
+        }
+
+        function download() {
+            var image = self.canvas
+                .toDataURL("image/png")
+                .replace("image/png", "image/octet-stream"); //Convert image to 'octet-stream' (Just a download, really)
+
+            var a = document.getElementById("a_download");
+            a?.setAttribute("download", "avatar.png");
+            a?.setAttribute("href", image);
         }
     }
 
