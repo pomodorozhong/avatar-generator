@@ -38,11 +38,17 @@ export class ControlGenerator {
         }
     }
     handler_numeric_range(container: Node, option: PatternSettingOption) {
-        let a: HTMLAnchorElement = document.createElement("a");
-        a.text = option.name;
-        container.appendChild(a);
+        let control_id: string = option.name;
+
+        let span: HTMLSpanElement = document.createElement("span");
+        span.innerText = option.name;
+        let label: HTMLLabelElement = document.createElement("label");
+        label.htmlFor = control_id;
+        label.appendChild(span);
+        container.appendChild(label);
 
         let select: HTMLSelectElement = document.createElement("select");
+        select.id = control_id;
         let start = option.range?.[0];
         let end = option.range?.[1];
         let step = option.range?.[2];
