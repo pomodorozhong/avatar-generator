@@ -16,7 +16,7 @@ export class CirclePacking implements IPattern {
             ])
         );
         this.settings.addOption(
-            new PatternSettingOption("compactness", "numeric_range", 0, [
+            new PatternSettingOption("gap", "numeric_range", 0, [
                 0,
                 30,
                 5,
@@ -43,7 +43,7 @@ export class CirclePacking implements IPattern {
         let max_radius: number = this.settings.getValue("max radius");
         let total_circles: number = 500;
         let create_circle_attempts: number = 500;
-        let compactness: number = this.settings.getValue("compactness");
+        let gap: number = this.settings.getValue("gap");
 
         let self = this;
 
@@ -104,7 +104,7 @@ export class CirclePacking implements IPattern {
                 let x: number = circle.x - otherCircle.x;
                 let y: number = circle.y - otherCircle.y;
 
-                if (a >= Math.sqrt(x * x + y * y) - compactness) {
+                if (a >= Math.sqrt(x * x + y * y) - gap) {
                     return true;
                 }
             }
