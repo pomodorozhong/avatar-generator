@@ -10,9 +10,9 @@ export class CirclePacking implements IPattern {
         this.settings = new PatternSetting();
         this.settings.addOption(
             new PatternSettingOption("max radius", "numeric_range", 100, [
-                10,
-                150,
-                10,
+                20,
+                200,
+                20,
             ])
         );
         this.settings.addOption(
