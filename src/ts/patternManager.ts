@@ -3,11 +3,13 @@ import { Cross } from "./patterns/cross";
 import { CubicDisarray } from "./patterns/cubicDisarray";
 import { PatternSetting } from "./patterns/patternSetting";
 import { TriangularMesh } from "./patterns/triangularMesh";
+import { CirclePacking } from "./patterns/circlePacking";
 
 const patternName = [
     "CubicDisarray",
     "Cross",
     "TriangularMesh",
+    "CirclePacking",
     // placeholder
 ] as const;
 export type PatternName = typeof patternName[number];
@@ -38,6 +40,7 @@ export class PatternManager {
             Cross: new Cross(),
             CubicDisarray: new CubicDisarray(),
             TriangularMesh: new TriangularMesh(),
+            CirclePacking: new CirclePacking(),
         };
     }
 
