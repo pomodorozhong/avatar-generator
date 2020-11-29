@@ -1,52 +1,52 @@
 * {
-  box-sizing: border-box;
-  font-family: sans-serif;
-  line-height: 1.6em;
-  font-size: 14px;
-  padding: 0;
-  margin: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    line-height: 1.6em;
+    font-size: 14px;
+    padding: 0;
+    margin: 0;
 }
 
-body{
-  background-color: #c3c3c3;
+body {
+    background-color: #c3c3c3;
 }
 
 #frame {
-  margin: auto;
-  width: 100%;
+    margin: auto;
+    width: 100%;
 
-  padding: 5px;
+    padding: 5px;
 
-  display: flex;
-  flex-wrap: wrap;
-  align-items: stretch;
-  flex-direction: row;
-  max-width: 750px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    flex-direction: row;
+    max-width: 750px;
 }
 
 #frame > div {
-  background-color: white;
-  margin-top: 1em;
-  margin-left: 0.5em;
-  margin-right: 0.5em;
+    background-color: white;
+    margin-top: 1em;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
 
-  box-shadow: 3px 4px #999999;
+    box-shadow: 3px 4px #999999;
 }
 
 #left_panel {
-
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: 200px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 200px;
 }
+
 #right_panel {
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: 480px;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 480px;
 }
 
 canvas {
-  width: 100%;
+    width: 100%;
 }

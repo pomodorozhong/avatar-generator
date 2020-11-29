@@ -1,23 +1,23 @@
 #btn_generate {
-  order: 99;
+    order: 99;
 
-  margin: auto;
-  display: block;
-  width: 80%;
+    margin: auto;
+    display: block;
+    width: 80%;
 
-  border-style: solid;
+    border-style: solid;
 
-  cursor: pointer;
-  border: none;
-  overflow: hidden;
+    cursor: pointer;
+    border: none;
+    overflow: hidden;
 
-  margin-top: 1em;
-  margin-bottom: 1em;
-  background-color: #939393;
-  border-color: #c3c3c3;
-  padding-left: 10px;
-  padding-top: 10px;
-  padding-right: 10px;
-  padding-bottom: 10px;
-  color: #f3f3f3;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    background-color: #939393;
+    border-color: #c3c3c3;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    color: #f3f3f3;
 }
