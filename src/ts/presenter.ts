@@ -11,6 +11,11 @@ export class Presenter {
         this.view = new View(this);
     }
 
+    selectPerformantPatternRandomly(): string {
+        this.patternManager.selectPerformantRandomly();
+        return this.patternManager.selected;
+    }
+
     selectPattern(selection: string) {
         this.patternManager.selected = selection;
     }
