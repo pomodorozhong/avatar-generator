@@ -21,7 +21,7 @@ export class View {
     }
 
     initialPatternSelection() {
-        let input: HTMLInputElement = <HTMLInputElement>(
+        let input: HTMLSelectElement = <HTMLSelectElement>(
             document.getElementById("ddl_select_pattern")
         );
         input.addEventListener("change", pattern_selected, false);
@@ -33,6 +33,10 @@ export class View {
             opt.appendChild(document.createTextNode(pattern));
             input.appendChild(opt);
         }
+
+        let result: string = this.presenter.selectPerformantPatternRandomly();
+        input.selectedIndex = pattern_list.indexOf(result);
+        this.presenter.draw(this.canvas);
 
         let self = this;
         function pattern_selected(e: any) {
