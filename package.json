@@ -2,16 +2,15 @@
   "name": "avatar-generator",
   "version": "1.1.0",
   "description": "",
-  "main": "main.js",
   "scripts": {
-    "dev": "npx parcel src/index.html --open",
-    "build": "npx parcel build src/index.html --no-source-maps --public-url ./",
+    "dev": "parcel src/index.html --open",
+    "build": "parcel build src/index.html --no-source-maps --public-url ./",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "pomodorozhong",
   "license": "MIT",
   "devDependencies": {
-    "parcel-bundler": "^1.12.4",
-    "typescript": "^3.7.5"
+    "parcel": "^2.16.4",
+    "typescript": "^5.9.3"
   }
 }

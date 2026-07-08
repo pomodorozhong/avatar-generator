@@ -1,3 +1,4 @@
+import "./github_corner";
 import { Presenter } from "./presenter";
 import { View } from "./view";
 import { ControlGenerator } from "./controlGenerator";
