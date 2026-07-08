@@ -6,9 +6,9 @@ export class View {
     canvas: HTMLCanvasElement;
     controlGenerator: ControlGenerator;
 
-    constructor(presenter: Presenter) {
+    constructor(presenter: Presenter, controlGenerator: ControlGenerator) {
         this.presenter = presenter;
-        this.controlGenerator = new ControlGenerator(this.presenter);
+        this.controlGenerator = controlGenerator;
         this.canvas = document.getElementsByTagName("canvas")[0];
 
         let size: number = 480;

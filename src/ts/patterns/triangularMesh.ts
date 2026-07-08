@@ -6,7 +6,7 @@ export class TriangularMesh implements IPattern {
     settings: PatternSetting;
 
     constructor() {
-        this.name = "CubicDisarray";
+        this.name = "TriangularMesh";
         this.settings = new PatternSetting();
         this.settings.addOption(
             new PatternSettingOption("randomness", "numeric_range", 1, [0.4, 2, 0.2])

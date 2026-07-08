@@ -1,14 +1,12 @@
-import { View } from "./view";
 import { PatternManager } from "./patternManager";
 import { PatternSetting } from "./patterns/patternSetting";
+import { IPatternSettingsPresenter } from "./patternSettingsPresenter.interface";
 
-export class Presenter {
-    view: View;
+export class Presenter implements IPatternSettingsPresenter {
     patternManager: PatternManager;
 
-    constructor() {
-        this.patternManager = new PatternManager();
-        this.view = new View(this);
+    constructor(patternManager: PatternManager) {
+        this.patternManager = patternManager;
     }
 
     selectPerformantPatternRandomly(): string {
