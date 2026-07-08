@@ -1,10 +1,10 @@
 import { OptionTypeName, PatternSettingOption } from "./patterns/patternSetting";
-import { Presenter } from "./presenter";
+import { IPatternSettingsPresenter } from "./patternSettingsPresenter.interface";
 
 export class ControlGenerator {
-    presenter: Presenter;
+    presenter: IPatternSettingsPresenter;
 
-    constructor(presenter: Presenter) {
+    constructor(presenter: IPatternSettingsPresenter) {
         this.presenter = presenter;
     }
 

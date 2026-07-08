@@ -68,12 +68,14 @@ export class PatternSetting {
             throw new Error("this.options === undefined");
         }
 
+        let found = false;
         for (let option of this.options) {
             if (option.name == optionName) {
                 option.value = value;
+                found = true;
             }
         }
-        if (!value) {
+        if (!found) {
             throw new Error(`${optionName} is not an option.`);
         }
     }
