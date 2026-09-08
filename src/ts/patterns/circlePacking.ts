@@ -25,11 +25,12 @@ export class CirclePacking implements IPattern {
     }
 
     draw(canvas: HTMLCanvasElement) {
-        let ctx: CanvasRenderingContext2D = canvas.getContext("2d");
+        const context = canvas.getContext("2d");
 
-        if (ctx == null) {
+        if (context == null) {
             throw new Error("ctx == null");
         }
+        const ctx: CanvasRenderingContext2D = context;
 
         ctx.fillStyle = "white";
         ctx.fillRect(0, 0, 480, 480);
@@ -48,7 +49,7 @@ export class CirclePacking implements IPattern {
         let self = this;
 
         function createAndDrawCircle() {
-            let new_circle: Circle;
+            let new_circle: Circle | undefined;
             let circleSafeToDraw: boolean = false;
             for (
                 let tries: number = 0;
@@ -69,7 +70,7 @@ export class CirclePacking implements IPattern {
                 }
             }
 
-            if (!circleSafeToDraw) {
+            if (!circleSafeToDraw || !new_circle) {
                 return;
             }
 

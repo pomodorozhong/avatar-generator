@@ -17,11 +17,12 @@ export class CubicDisarray implements IPattern {
     }
 
     draw(canvas: HTMLCanvasElement) {
-        let ctx = canvas.getContext("2d");
+        const context = canvas.getContext("2d");
 
-        if (ctx == null) {
+        if (context == null) {
             throw new Error("ctx == null");
         }
+        const ctx: CanvasRenderingContext2D = context;
 
         ctx.fillStyle = "white";
         ctx.fillRect(0, 0, 480, 480);
@@ -36,7 +37,7 @@ export class CubicDisarray implements IPattern {
         squareNumOneRow = parseInt(squareNumOneRow) + 1;
         var squareSize = (size - 2 * offset) / squareNumOneRow;
 
-        function drawRect(width, height) {
+        function drawRect(width: number, height: number) {
             ctx.beginPath();
             ctx.rect(-width / 2, -height / 2, width, height);
             ctx.stroke();

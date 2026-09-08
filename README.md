@@ -12,16 +12,22 @@ cd avatar-generator
 npm install
 ```
 
-## Build
+## Development
 
-To watch the chage of source code and automatically rebuild:
+Start the Vite development server:
 
 ```sh
 npm run dev
 ```
 
-To build for once:
+Create a production build in `dist`:
 
 ```sh
 npm run build
+```
+
+Preview the production build locally:
+
+```sh
+npm run preview
 ```

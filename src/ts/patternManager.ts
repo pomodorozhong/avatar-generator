@@ -15,51 +15,39 @@ const patternName = [
 export type PatternName = typeof patternName[number];
 
 export class PatternManager {
-    patterns: Record<PatternName, IPattern>;
-    patternNames: Array<string>;
-    private patternNamesOfPerformants: Array<string>;
-    private _selected: PatternName;
+    patterns: Record<PatternName, IPattern> = {
+        Cross: new Cross(),
+        CubicDisarray: new CubicDisarray(),
+        TriangularMesh: new TriangularMesh(),
+        CirclePacking: new CirclePacking(),
+    };
+    patternNames: Array<PatternName> = [...patternName];
+    private patternNamesOfPerformants: Array<PatternName> = [...patternName];
+    private _selected: PatternName = patternName[0];
+
     set selected(selection: string) {
-        this._selected = <PatternName>selection;
+        if (!patternName.some((name) => name === selection)) {
+            throw new Error(`${selection} is not a pattern.`);
+        }
+
+        this._selected = selection as PatternName;
     }
-    get selected(): string {
+    get selected(): PatternName {
         return this._selected;
     }
     get selectedSetting(): PatternSetting {
-        return this.patterns[this.selected].settings;
-    }
-
-    constructor() {
-        this.initPatterns();
-        this.selected = patternName[0];
-
-        this.patternNames = (patternName as any) as Array<string>;
-        this.patternNamesOfPerformants = [
-            this.patternNames[0],
-            this.patternNames[1],
-            this.patternNames[2],
-            this.patternNames[3],
-        ];
+        return this.patterns[this._selected].settings;
     }
 
     selectPerformantRandomly(): void {
         let length: number = this.patternNamesOfPerformants.length;
         let selection: number = Math.floor(Math.random() * length) % length;
-        let selectionName: string = this.patternNamesOfPerformants[selection];
+        let selectionName: PatternName = this.patternNamesOfPerformants[selection];
         
         this.selected = selectionName;
     }
 
-    initPatterns() {
-        this.patterns = {
-            Cross: new Cross(),
-            CubicDisarray: new CubicDisarray(),
-            TriangularMesh: new TriangularMesh(),
-            CirclePacking: new CirclePacking(),
-        };
-    }
-
     draw(canvas: HTMLCanvasElement) {
-        this.patterns[this.selected].draw(canvas);
+        this.patterns[this._selected].draw(canvas);
     }
 }

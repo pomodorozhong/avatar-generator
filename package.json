@@ -2,16 +2,21 @@
   "name": "avatar-generator",
   "version": "1.1.0",
   "description": "",
-  "main": "main.js",
+  "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "npx parcel src/index.html --open",
-    "build": "npx parcel build src/index.html --no-source-maps --public-url ./",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "build": "npm run typecheck && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit"
   },
   "author": "pomodorozhong",
   "license": "MIT",
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  },
   "devDependencies": {
-    "parcel-bundler": "^1.12.4",
-    "typescript": "^3.7.5"
+    "typescript": "^7.0.2",
+    "vite": "^8.2.2"
   }
 }
