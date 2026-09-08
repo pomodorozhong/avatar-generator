@@ -16,50 +16,50 @@ export class CubicDisarray implements IPattern {
         );
     }
 
-    draw(canvas: HTMLCanvasElement) {
-        let ctx = canvas.getContext("2d");
+    draw(canvas: HTMLCanvasElement): void {
+        const ctx = canvas.getContext("2d");
 
-        if (ctx == null) {
-            throw new Error("ctx == null");
+        if (ctx === null) {
+            throw new Error("The 2D canvas context is unavailable.");
         }
 
         ctx.fillStyle = "white";
         ctx.fillRect(0, 0, 480, 480);
 
-        var size = 480;
+        const size = 480;
         ctx.lineWidth = 2;
 
-        var randomDisplacement = 15;
-        var rotateMultiplier = 20;
-        var offset = 10;
-        var squareNumOneRow = this.settings.getValue("compactness");
-        squareNumOneRow = parseInt(squareNumOneRow) + 1;
-        var squareSize = (size - 2 * offset) / squareNumOneRow;
+        const randomDisplacement = 15;
+        const rotateMultiplier = 20;
+        const offset = 10;
+        const squareNumOneRow = this.settings.getNumericValue("compactness") + 1;
+        const squareSize = (size - 2 * offset) / squareNumOneRow;
+        const randomness = this.settings.getNumericValue("randomness");
 
-        function drawRect(width, height) {
+        const drawRect = (width: number, height: number): void => {
             ctx.beginPath();
             ctx.rect(-width / 2, -height / 2, width, height);
             ctx.stroke();
-        }
+        };
 
-        let xLimit = size - squareSize - offset;
-        let yLimit = size - squareSize - offset;
-        for (var x = squareSize; x <= xLimit; x += squareSize) {
-            for (var y = squareSize; y <= yLimit; y += squareSize) {
-                var plusOrMinus = Math.random() < 0.5 ? -1 : 1;
-                var rotateAmt =
+        const xLimit = size - squareSize - offset;
+        const yLimit = size - squareSize - offset;
+        for (let x = squareSize; x <= xLimit; x += squareSize) {
+            for (let y = squareSize; y <= yLimit; y += squareSize) {
+                let plusOrMinus = Math.random() < 0.5 ? -1 : 1;
+                const rotateAmt =
                     (((y / size) * Math.PI) / 180) *
                     plusOrMinus *
                     Math.random() *
-                    this.settings.getValue("randomness") *
+                    randomness *
                     rotateMultiplier;
 
                 plusOrMinus = Math.random() < 0.5 ? -1 : 1;
-                var translateAmt =
+                const translateAmt =
                     (y / size) *
                     plusOrMinus *
                     Math.random() *
-                    this.settings.getValue("randomness") *
+                    randomness *
                     randomDisplacement;
 
                 ctx.save();

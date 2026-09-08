@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "vite --open /avatar-generator/",
     "build": "vite build",
+    "typecheck": "tsc --noEmit --pretty false",
     "preview": "vite preview --open /avatar-generator/"
   },
   "author": "pomodorozhong",
@@ -15,7 +16,7 @@
     "node": "^20.19.0 || >=22.12.0"
   },
   "devDependencies": {
-    "typescript": "^3.7.5",
+    "typescript": "^7.0.2",
     "vite": "^8.2.2"
   }
 }

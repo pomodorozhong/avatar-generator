@@ -1,26 +1,26 @@
 import { View } from "./view";
 import { PatternManager } from "./patternManager";
-import { PatternSetting } from "./patterns/patternSetting";
+import type { PatternName } from "./patternManager";
+import type { PatternSetting, PatternSettingValue } from "./patterns/patternSetting";
 
 export class Presenter {
-    view: View;
-    patternManager: PatternManager;
+    private readonly patternManager: PatternManager;
 
     constructor() {
         this.patternManager = new PatternManager();
-        this.view = new View(this);
+        new View(this);
     }
 
-    selectPerformantPatternRandomly(): string {
+    selectPerformantPatternRandomly(): PatternName {
         this.patternManager.selectPerformantRandomly();
         return this.patternManager.selected;
     }
 
-    selectPattern(selection: string) {
+    selectPattern(selection: string): void {
         this.patternManager.selected = selection;
     }
 
-    getPatternList(): Array<string> {
+    getPatternList(): readonly PatternName[] {
         return this.patternManager.patternNames;
     }
 
@@ -32,12 +32,14 @@ export class Presenter {
         return this.patternManager.selectedSetting;
     }
 
-    setSelectedPatternSetting(settingName: string, value: any): void {
+    setSelectedPatternSetting(
+        settingName: string,
+        value: PatternSettingValue
+    ): void {
         this.patternManager.selectedSetting.setValue(settingName, value);
-        // TODO: error handling
     }
 
-    draw(canvas: HTMLCanvasElement) {
+    draw(canvas: HTMLCanvasElement): void {
         this.patternManager.draw(canvas);
     }
 }

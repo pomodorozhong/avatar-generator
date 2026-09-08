@@ -24,87 +24,73 @@ export class CirclePacking implements IPattern {
         );
     }
 
-    draw(canvas: HTMLCanvasElement) {
-        let ctx: CanvasRenderingContext2D = canvas.getContext("2d");
+    draw(canvas: HTMLCanvasElement): void {
+        const ctx = canvas.getContext("2d");
 
-        if (ctx == null) {
-            throw new Error("ctx == null");
+        if (ctx === null) {
+            throw new Error("The 2D canvas context is unavailable.");
         }
 
         ctx.fillStyle = "white";
         ctx.fillRect(0, 0, 480, 480);
 
-        let size = 480;
+        const size = 480;
         ctx.lineWidth = 2;
         ctx.lineJoin = "bevel";
 
-        let circles: Array<Circle> = [];
-        let min_radius: number = 2;
-        let max_radius: number = this.settings.getValue("max radius");
-        let total_circles: number = 500;
-        let create_circle_attempts: number = 500;
-        let gap: number = this.settings.getValue("gap");
+        const circles: Circle[] = [];
+        const minRadius = 2;
+        const maxRadius = this.settings.getNumericValue("max radius");
+        const totalCircles = 500;
+        const createCircleAttempts = 500;
+        const gap = this.settings.getNumericValue("gap");
 
-        let self = this;
-
-        function createAndDrawCircle() {
-            let new_circle: Circle;
-            let circleSafeToDraw: boolean = false;
-            for (
-                let tries: number = 0;
-                tries < create_circle_attempts;
-                tries++
-            ) {
-                new_circle = {
+        const createAndDrawCircle = (): void => {
+            let circleToDraw: Circle | undefined;
+            for (let tries = 0; tries < createCircleAttempts; tries++) {
+                const candidate = {
                     x: Math.floor(Math.random() * size),
                     y: Math.floor(Math.random() * size),
-                    radius: min_radius,
+                    radius: minRadius,
                 };
 
-                if (doesCircleHaveACollision(new_circle)) {
-                    continue;
-                } else {
-                    circleSafeToDraw = true;
+                if (!doesCircleHaveACollision(candidate)) {
+                    circleToDraw = candidate;
                     break;
                 }
             }
 
-            if (!circleSafeToDraw) {
+            if (circleToDraw === undefined) {
                 return;
             }
 
-            for (
-                let radiusSize: number = min_radius;
-                radiusSize < max_radius;
-                radiusSize++
-            ) {
-                new_circle.radius = radiusSize;
-                if (doesCircleHaveACollision(new_circle)) {
-                    new_circle.radius--;
+            for (let radius = minRadius; radius < maxRadius; radius++) {
+                circleToDraw.radius = radius;
+                if (doesCircleHaveACollision(circleToDraw)) {
+                    circleToDraw.radius--;
                     break;
                 }
             }
 
-            circles.push(new_circle);
+            circles.push(circleToDraw);
             ctx.beginPath();
             ctx.arc(
-                new_circle.x,
-                new_circle.y,
-                new_circle.radius,
+                circleToDraw.x,
+                circleToDraw.y,
+                circleToDraw.radius,
                 0,
                 2 * Math.PI
             );
             ctx.stroke();
-        }
+        };
 
-        function doesCircleHaveACollision(circle: Circle) {
-            for (let i: number = 0; i < circles.length; i++) {
-                let otherCircle: Circle = circles[i];
-                let a: number = circle.radius + otherCircle.radius;
-                let x: number = circle.x - otherCircle.x;
-                let y: number = circle.y - otherCircle.y;
+        const doesCircleHaveACollision = (circle: Circle): boolean => {
+            for (const otherCircle of circles) {
+                const minimumDistance = circle.radius + otherCircle.radius;
+                const x = circle.x - otherCircle.x;
+                const y = circle.y - otherCircle.y;
 
-                if (a >= Math.sqrt(x * x + y * y) - gap) {
+                if (minimumDistance >= Math.sqrt(x * x + y * y) - gap) {
                     return true;
                 }
             }
@@ -124,22 +110,16 @@ export class CirclePacking implements IPattern {
             }
 
             return false;
-        }
+        };
 
-        for (let i: number = 0; i < total_circles; i++) {
+        for (let i = 0; i < totalCircles; i++) {
             createAndDrawCircle();
         }
     }
 }
 
-class Circle {
+interface Circle {
     x: number;
     y: number;
     radius: number;
-
-    constructor(x: number, y: number, radius: number) {
-        this.x = x;
-        this.y = y;
-        this.radius = radius;
-    }
 }
