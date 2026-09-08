@@ -1,8 +1,6 @@
-import type { PatternSetting } from "./patternSetting";
-
 export interface IPattern {
     name: string;
-    settings: PatternSetting;
+    settings: Record<string, any>;
 
-    draw(canvas: HTMLCanvasElement): void;
+    draw(canvas: HTMLCanvasElement);
 }

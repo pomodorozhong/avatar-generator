@@ -19,7 +19,7 @@ export class ControlGenerator {
 
         // Clear the container
         while (container.firstChild) {
-            container.removeChild(container.firstChild);
+            container.removeChild(container.lastChild);
         }
 
         for (let index = 0; index < setting_options.length; index++) {

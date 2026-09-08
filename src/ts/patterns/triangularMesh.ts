@@ -1,11 +1,6 @@
 import { IPattern } from "./pattern.interface";
 import { PatternSetting, PatternSettingOption } from "./patternSetting";
 
-interface Point {
-    x: number;
-    y: number;
-}
-
 export class TriangularMesh implements IPattern {
     name: string;
     settings: PatternSetting;
@@ -22,12 +17,11 @@ export class TriangularMesh implements IPattern {
     }
 
     draw(canvas: HTMLCanvasElement) {
-        const context = canvas.getContext("2d");
+        let ctx: CanvasRenderingContext2D = canvas.getContext("2d");
 
-        if (context == null) {
+        if (ctx == null) {
             throw new Error("ctx == null");
         }
-        const ctx: CanvasRenderingContext2D = context;
 
         ctx.fillStyle = "white";
         ctx.fillRect(0, 0, 480, 480);
@@ -36,9 +30,10 @@ export class TriangularMesh implements IPattern {
         ctx.lineWidth = 2;
         ctx.lineJoin = "bevel";
 
-        let line: Array<Point>;
+        let line;
+        let dot;
         let odd = false;
-        let lines: Array<Array<Point>> = [];
+        let lines = [];
 
         let compactness = this.settings.getValue("compactness");
         let randomness = this.settings.getValue("randomness");
@@ -49,6 +44,7 @@ export class TriangularMesh implements IPattern {
             odd = !odd;
             line = [];
             for (var x = gap / 4; x <= size; x += gap) {
+                dot = { x: x + (odd ? gap / 2 : 0), y: y };
                 let x_offset = (Math.random() * 0.8 - 0.4) * gap * randomness + (odd ? gap / 2 : 0);
                 let y_offset = (Math.random() * 0.8 - 0.4) * gap * randomness;
                 line.push({
@@ -60,7 +56,7 @@ export class TriangularMesh implements IPattern {
             lines.push(line);
         }
 
-        let dotLine: Array<Point>;
+        var dotLine;
         odd = true;
 
         // linking the points, and fill in some color
@@ -76,7 +72,7 @@ export class TriangularMesh implements IPattern {
             }
         }
 
-        function drawTriangle(pointA: Point, pointB: Point, pointC: Point) {
+        function drawTriangle(pointA, pointB, pointC) {
             ctx.beginPath();
             ctx.moveTo(pointA.x, pointA.y);
             ctx.lineTo(pointB.x, pointB.y);

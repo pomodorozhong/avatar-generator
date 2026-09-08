@@ -9,11 +9,7 @@ export class View {
     constructor(presenter: Presenter) {
         this.presenter = presenter;
         this.controlGenerator = new ControlGenerator(this.presenter);
-        const canvas = document.querySelector("canvas");
-        if (!canvas) {
-            throw new Error("Canvas element not found.");
-        }
-        this.canvas = canvas;
+        this.canvas = document.getElementsByTagName("canvas")[0];
 
         let size: number = 480;
         this.canvas.width = size;
@@ -25,12 +21,9 @@ export class View {
     }
 
     initialPatternSelection() {
-        let input = document.querySelector<HTMLSelectElement>(
-            "#ddl_select_pattern"
+        let input: HTMLSelectElement = <HTMLSelectElement>(
+            document.getElementById("ddl_select_pattern")
         );
-        if (!input) {
-            throw new Error("Pattern selector not found.");
-        }
         input.addEventListener("change", pattern_selected, false);
 
         let pattern_list = this.presenter.getPatternList();
@@ -54,11 +47,7 @@ export class View {
     }
 
     hookEventListeners() {
-        const generateButton = document.getElementById("btn_generate");
-        if (!generateButton) {
-            throw new Error("Generate button not found.");
-        }
-        generateButton.addEventListener("click", draw);
+        document.getElementById("btn_generate").addEventListener("click", draw);
         this.canvas.addEventListener("click", download);
 
         let self = this;
@@ -79,9 +68,6 @@ export class View {
 
     settingHandler() {
         let container = document.getElementById("setting_container");
-        if (!container) {
-            throw new Error("Setting container not found.");
-        }
 
         this.controlGenerator.updateSettingControl(container);
     }

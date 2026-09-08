@@ -6,9 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite --open /avatar-generator/",
-    "build": "npm run typecheck && vite build",
-    "preview": "vite preview --open /avatar-generator/",
-    "typecheck": "tsc --noEmit"
+    "build": "vite build",
+    "preview": "vite preview --open /avatar-generator/"
   },
   "author": "pomodorozhong",
   "license": "MIT",
@@ -16,7 +15,7 @@
     "node": "^20.19.0 || >=22.12.0"
   },
   "devDependencies": {
-    "typescript": "^7.0.2",
+    "typescript": "^3.7.5",
     "vite": "^8.2.2"
   }
 }

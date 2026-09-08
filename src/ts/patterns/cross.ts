@@ -16,10 +16,6 @@ export class Cross implements IPattern {
     draw(canvas: HTMLCanvasElement) {
         let ctx = canvas.getContext("2d");
 
-        if (ctx == null) {
-            throw new Error("ctx == null");
-        }
-
         ctx.fillStyle = "white";
         ctx.fillRect(0, 0, 480, 480);
 
