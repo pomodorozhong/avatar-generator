@@ -20,14 +20,22 @@ Start the Vite development server:
 npm run dev
 ```
 
+This opens the app at `http://localhost:5173/avatar-generator/`.
+
 Create a production build in `dist`:
 
 ```sh
 npm run build
 ```
 
-Preview the production build locally:
+The build command only creates the files in `dist`; it does not start a server.
+Preview the production build locally with:
 
 ```sh
 npm run preview
 ```
+
+This opens the app at `http://localhost:4173/avatar-generator/`.
+
+Do not open `src/index.html` or `dist/index.html` with a `file://` URL. Vite
+applications use browser modules and must be loaded through an HTTP server.

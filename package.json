@@ -5,9 +5,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --open /avatar-generator/",
     "build": "npm run typecheck && vite build",
-    "preview": "vite preview",
+    "preview": "vite preview --open /avatar-generator/",
     "typecheck": "tsc --noEmit"
   },
   "author": "pomodorozhong",
