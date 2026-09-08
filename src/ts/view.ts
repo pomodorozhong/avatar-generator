@@ -2,16 +2,20 @@ import { Presenter } from "./presenter";
 import { ControlGenerator } from "./controlGenerator";
 
 export class View {
-    presenter: Presenter;
-    canvas: HTMLCanvasElement;
-    controlGenerator: ControlGenerator;
+    private readonly presenter: Presenter;
+    private readonly canvas: HTMLCanvasElement;
+    private readonly controlGenerator: ControlGenerator;
 
     constructor(presenter: Presenter) {
         this.presenter = presenter;
         this.controlGenerator = new ControlGenerator(this.presenter);
-        this.canvas = document.getElementsByTagName("canvas")[0];
+        const canvas = document.querySelector<HTMLCanvasElement>("canvas");
+        if (canvas === null) {
+            throw new Error("The canvas element is missing.");
+        }
+        this.canvas = canvas;
 
-        let size: number = 480;
+        const size = 480;
         this.canvas.width = size;
         this.canvas.height = size;
 
@@ -20,54 +24,61 @@ export class View {
         this.settingHandler();
     }
 
-    initialPatternSelection() {
-        let input: HTMLSelectElement = <HTMLSelectElement>(
-            document.getElementById("ddl_select_pattern")
+    private initialPatternSelection(): void {
+        const input = document.querySelector<HTMLSelectElement>(
+            "#ddl_select_pattern"
         );
-        input.addEventListener("change", pattern_selected, false);
-
-        let pattern_list = this.presenter.getPatternList();
-        for (let index = 0; index < pattern_list.length; index++) {
-            const pattern = pattern_list[index];
-            var opt = document.createElement("option");
-            opt.appendChild(document.createTextNode(pattern));
-            input.appendChild(opt);
+        if (input === null) {
+            throw new Error("The pattern selector is missing.");
         }
 
-        let result: string = this.presenter.selectPerformantPatternRandomly();
-        input.selectedIndex = pattern_list.indexOf(result);
+        input.addEventListener("change", (event: Event) => {
+            const target = event.currentTarget;
+            if (!(target instanceof HTMLSelectElement)) {
+                throw new Error("The pattern selector must be a select element.");
+            }
+
+            this.presenter.selectPattern(target.value);
+            this.settingHandler();
+        });
+
+        const patternList = this.presenter.getPatternList();
+        for (const pattern of patternList) {
+            input.add(new Option(pattern, pattern));
+        }
+
+        const result = this.presenter.selectPerformantPatternRandomly();
+        input.value = result;
         this.presenter.draw(this.canvas);
-
-        let self = this;
-        function pattern_selected(e: any) {
-            let pattern = e.target.value;
-            self.presenter.selectPattern(pattern);
-            self.settingHandler();
-        }
     }
 
-    hookEventListeners() {
-        document.getElementById("btn_generate").addEventListener("click", draw);
-        this.canvas.addEventListener("click", download);
-
-        let self = this;
-        function draw() {
-            self.presenter.draw(self.canvas);
+    private hookEventListeners(): void {
+        const generateButton = document.querySelector<HTMLButtonElement>(
+            "#btn_generate"
+        );
+        const downloadLink = document.querySelector<HTMLAnchorElement>(
+            "#a_download"
+        );
+        if (generateButton === null || downloadLink === null) {
+            throw new Error("The generator controls are missing.");
         }
 
-        function download() {
-            var image = self.canvas
-                .toDataURL("image/png")
-                .replace("image/png", "image/octet-stream"); //Convert image to 'octet-stream' (Just a download, really)
+        generateButton.addEventListener("click", () => {
+            this.presenter.draw(this.canvas);
+        });
 
-            var a = document.getElementById("a_download");
-            a?.setAttribute("download", "avatar.png");
-            a?.setAttribute("href", image);
-        }
+        this.canvas.addEventListener("click", () => {
+            const image = this.canvas.toDataURL("image/png");
+            downloadLink.download = "avatar.png";
+            downloadLink.href = image;
+        });
     }
 
-    settingHandler() {
-        let container = document.getElementById("setting_container");
+    private settingHandler(): void {
+        const container = document.querySelector<HTMLElement>("#setting_container");
+        if (container === null) {
+            throw new Error("The setting container is missing.");
+        }
 
         this.controlGenerator.updateSettingControl(container);
     }

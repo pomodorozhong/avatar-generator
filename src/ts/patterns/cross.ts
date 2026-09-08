@@ -13,22 +13,25 @@ export class Cross implements IPattern {
         );
     }
 
-    draw(canvas: HTMLCanvasElement) {
-        let ctx = canvas.getContext("2d");
+    draw(canvas: HTMLCanvasElement): void {
+        const ctx = canvas.getContext("2d");
+        if (ctx === null) {
+            throw new Error("The 2D canvas context is unavailable.");
+        }
 
         ctx.fillStyle = "white";
         ctx.fillRect(0, 0, 480, 480);
 
-        let width = 50;
-        let height = width;
+        const width = 50;
+        const height = width;
 
         let x = 100;
         let y = 100;
         // upper left to lower right
         for (let index = 0; index < 24; index++) {
-            let randOffestX = this.calcOffest(x);
-            let randOffestY = this.calcOffest(y);
-            ctx.strokeRect(x + randOffestX, y + randOffestY, width, height);
+            const randomOffsetX = this.calcOffset(x);
+            const randomOffsetY = this.calcOffset(y);
+            ctx.strokeRect(x + randomOffsetX, y + randomOffsetY, width, height);
             x += 10;
             y += 10;
         }
@@ -37,34 +40,35 @@ export class Cross implements IPattern {
         y = 480 - 150;
         // lower left to upper right
         for (let index = 0; index < 24; index++) {
-            let randOffestX = this.calcOffest(x);
-            let randOffestY = this.calcOffest(y);
-            ctx.strokeRect(x + randOffestX, y + randOffestY, width, height);
+            const randomOffsetX = this.calcOffset(x);
+            const randomOffsetY = this.calcOffset(y);
+            ctx.strokeRect(x + randomOffsetX, y + randomOffsetY, width, height);
             x += 10;
             y -= 10;
         }
     }
 
-    calcOffest(coordination: number): number {
-        let centerCalibration = this.centerPrecisionCoeff(coordination);
-        let randOffest = 40 * Math.random() * centerCalibration;
+    private calcOffset(coordination: number): number {
+        const centerCalibration = this.centerPrecisionCoefficient(coordination);
+        let randomOffset = 40 * Math.random() * centerCalibration;
 
         if (Math.random() < 0.5) {
-            randOffest *= -1;
+            randomOffset *= -1;
         }
 
-        return randOffest;
+        return randomOffset;
     }
 
-    centerPrecisionCoeff(coordination: number): number {
-        let width = 50;
+    private centerPrecisionCoefficient(coordination: number): number {
+        const width = 50;
 
-        let center = 480 / 2;
-        let boxCenter = coordination + width / 2;
-        let maxOffset = center;
-        let offset = Math.abs(boxCenter - center);
+        const center = 480 / 2;
+        const boxCenter = coordination + width / 2;
+        const maxOffset = center;
+        const offset = Math.abs(boxCenter - center);
 
-        let coeff = (offset / maxOffset) * this.settings.getValue("randomness");
-        return coeff;
+        return (
+            (offset / maxOffset) * this.settings.getNumericValue("randomness")
+        );
     }
 }

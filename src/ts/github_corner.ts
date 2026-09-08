@@ -2,14 +2,14 @@ export function GithubCornerTopRight(
     url: string = "https://github.com/pomodorozhong/github-corners",
     backgroundColor: string = "#151513",
     foregroundColor: string = "#ffffff"
-) {
-    let container: HTMLDivElement = document.createElement("div");
+): void {
+    const container = document.createElement("div");
     document.body.appendChild(container);
 
     // Create a shadow root
-    let shadowRoot: ShadowRoot = container.attachShadow({ mode: "open" });
+    const shadowRoot = container.attachShadow({ mode: "open" });
 
-    let wrapper: HTMLDivElement = document.createElement("div");
+    const wrapper = document.createElement("div");
     wrapper.innerHTML = `
         <div class="github-corner">
             <svg width="80" height="80" viewBox="0 0 250 250" style="fill:${backgroundColor}; color:${foregroundColor}; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true">
@@ -25,7 +25,7 @@ export function GithubCornerTopRight(
         </div>`;
 
     // Create some CSS to apply to the shadow dom
-    let style: HTMLStyleElement = document.createElement("style");
+    const style = document.createElement("style");
     style.textContent = `
         .github-corner:hover .octo-arm {
             animation: octocat-wave 560ms ease-in-out
@@ -62,7 +62,7 @@ export function GithubCornerTopRight(
     shadowRoot.appendChild(wrapper);
 }
 // white on black
-let url: string = "https://github.com/pomodorozhong/avatar-generator";
+const url = "https://github.com/pomodorozhong/avatar-generator";
 GithubCornerTopRight(url);
 
 // black on white

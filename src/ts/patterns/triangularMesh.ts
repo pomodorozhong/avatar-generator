@@ -1,12 +1,17 @@
 import { IPattern } from "./pattern.interface";
 import { PatternSetting, PatternSettingOption } from "./patternSetting";
 
+interface Point {
+    x: number;
+    y: number;
+}
+
 export class TriangularMesh implements IPattern {
     name: string;
     settings: PatternSetting;
 
     constructor() {
-        this.name = "CubicDisarray";
+        this.name = "TriangularMesh";
         this.settings = new PatternSetting();
         this.settings.addOption(
             new PatternSettingOption("randomness", "numeric_range", 1, [0.4, 2, 0.2])
@@ -16,73 +21,75 @@ export class TriangularMesh implements IPattern {
         );
     }
 
-    draw(canvas: HTMLCanvasElement) {
-        let ctx: CanvasRenderingContext2D = canvas.getContext("2d");
+    draw(canvas: HTMLCanvasElement): void {
+        const ctx = canvas.getContext("2d");
 
-        if (ctx == null) {
-            throw new Error("ctx == null");
+        if (ctx === null) {
+            throw new Error("The 2D canvas context is unavailable.");
         }
+        const context: CanvasRenderingContext2D = ctx;
 
-        ctx.fillStyle = "white";
-        ctx.fillRect(0, 0, 480, 480);
+        context.fillStyle = "white";
+        context.fillRect(0, 0, 480, 480);
 
-        let size = 480;
-        ctx.lineWidth = 2;
-        ctx.lineJoin = "bevel";
+        const size = 480;
+        context.lineWidth = 2;
+        context.lineJoin = "bevel";
 
-        let line;
-        let dot;
         let odd = false;
-        let lines = [];
+        const lines: Point[][] = [];
 
-        let compactness = this.settings.getValue("compactness");
-        let randomness = this.settings.getValue("randomness");
-        let gap = size / compactness;
+        const compactness = this.settings.getNumericValue("compactness");
+        const randomness = this.settings.getNumericValue("randomness");
+        const gap = size / compactness;
 
         // setup the points
-        for (var y = gap / 2; y <= size; y += gap) {
+        for (let y = gap / 2; y <= size; y += gap) {
             odd = !odd;
-            line = [];
-            for (var x = gap / 4; x <= size; x += gap) {
-                dot = { x: x + (odd ? gap / 2 : 0), y: y };
-                let x_offset = (Math.random() * 0.8 - 0.4) * gap * randomness + (odd ? gap / 2 : 0);
-                let y_offset = (Math.random() * 0.8 - 0.4) * gap * randomness;
+            const line: Point[] = [];
+            for (let x = gap / 4; x <= size; x += gap) {
+                const xOffset =
+                    (Math.random() * 0.8 - 0.4) * gap * randomness +
+                    (odd ? gap / 2 : 0);
+                const yOffset = (Math.random() * 0.8 - 0.4) * gap * randomness;
                 line.push({
-                    x: x + x_offset,
-                    y: y + y_offset,
+                    x: x + xOffset,
+                    y: y + yOffset,
                 });
-                ctx.fill();
             }
             lines.push(line);
         }
 
-        var dotLine;
         odd = true;
 
         // linking the points, and fill in some color
-        for (var y = 0; y < lines.length - 1; y++) {
+        for (let row = 0; row < lines.length - 1; row++) {
             odd = !odd;
-            dotLine = [];
-            for (var i = 0; i < lines[y].length; i++) {
-                dotLine.push(odd ? lines[y][i] : lines[y + 1][i]);
-                dotLine.push(odd ? lines[y + 1][i] : lines[y][i]);
+            const dotLine: Point[] = [];
+            for (let index = 0; index < lines[row].length; index++) {
+                dotLine.push(odd ? lines[row][index] : lines[row + 1][index]);
+                dotLine.push(odd ? lines[row + 1][index] : lines[row][index]);
             }
-            for (var i = 0; i < dotLine.length - 2; i++) {
-                drawTriangle(dotLine[i], dotLine[i + 1], dotLine[i + 2]);
+            for (let index = 0; index < dotLine.length - 2; index++) {
+                drawTriangle(
+                    dotLine[index],
+                    dotLine[index + 1],
+                    dotLine[index + 2]
+                );
             }
         }
 
-        function drawTriangle(pointA, pointB, pointC) {
-            ctx.beginPath();
-            ctx.moveTo(pointA.x, pointA.y);
-            ctx.lineTo(pointB.x, pointB.y);
-            ctx.lineTo(pointC.x, pointC.y);
-            ctx.lineTo(pointA.x, pointA.y);
-            ctx.closePath();
-            var gray = Math.floor(Math.random() * 16).toString(16);
-            ctx.fillStyle = "#" + gray + gray + gray;
-            ctx.fill();
-            ctx.stroke();
+        function drawTriangle(pointA: Point, pointB: Point, pointC: Point): void {
+            context.beginPath();
+            context.moveTo(pointA.x, pointA.y);
+            context.lineTo(pointB.x, pointB.y);
+            context.lineTo(pointC.x, pointC.y);
+            context.lineTo(pointA.x, pointA.y);
+            context.closePath();
+            const gray = Math.floor(Math.random() * 16).toString(16);
+            context.fillStyle = "#" + gray + gray + gray;
+            context.fill();
+            context.stroke();
         }
     }
 }

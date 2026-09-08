@@ -1,87 +1,77 @@
-import { OptionTypeName, PatternSettingOption } from "./patterns/patternSetting";
+import type {
+    OptionTypeName,
+    PatternSettingOption,
+} from "./patterns/patternSetting";
 import { Presenter } from "./presenter";
 
 export class ControlGenerator {
-    presenter: Presenter;
+    private readonly presenter: Presenter;
 
     constructor(presenter: Presenter) {
         this.presenter = presenter;
     }
 
-    updateSettingControl(container: Node) {
-        let patternName: string = this.presenter.getSelectedPatternName();
-        let setting_options:
-            | Array<PatternSettingOption>
-            | undefined = this.presenter.getSelectedPatternSetting().getOptions();
-        if (!setting_options) {
-            throw new Error("setting_options is undefined");
-        }
+    updateSettingControl(container: HTMLElement): void {
+        const settingOptions = this.presenter.getSelectedPatternSetting().getOptions();
 
         // Clear the container
-        while (container.firstChild) {
+        while (container.lastChild) {
             container.removeChild(container.lastChild);
         }
 
-        for (let index = 0; index < setting_options.length; index++) {
-            const option: PatternSettingOption = setting_options[index];
-            const element: OptionTypeName = option.type as OptionTypeName;
-
+        for (const option of settingOptions) {
+            const element: OptionTypeName = option.type;
             switch (element) {
                 case "numeric_range":
-                    this.handler_numeric_range(container, option);
+                    this.handleNumericRange(container, option);
                     break;
                 case "string":
                 case "bool":
-                default:
                     throw new Error(`${element}'s Control Generation not implemented.`);
             }
         }
     }
-    handler_numeric_range(container: Node, option: PatternSettingOption) {
-        let control_id: string = option.name;
 
-        let span: HTMLSpanElement = document.createElement("span");
-        span.innerText = option.name;
-        let label: HTMLLabelElement = document.createElement("label");
-        label.htmlFor = control_id;
-        label.appendChild(span);
-        container.appendChild(label);
-
-        let select: HTMLSelectElement = document.createElement("select");
-        select.id = control_id;
-        let start = option.range?.[0];
-        let end = option.range?.[1];
-        let step = option.range?.[2];
-        if (start === undefined || end === undefined || step === undefined) {
+    private handleNumericRange(
+        container: HTMLElement,
+        option: PatternSettingOption
+    ): void {
+        const controlId = option.name;
+        const range = option.range;
+        if (range === undefined) {
             throw new Error(`${option.name}'s range is bad`);
         }
-        for (let value = start; value <= end; value += step) {
-            // round to first place after decimal
-            value = Math.round(value * 10) / 10;
 
-            let opt = document.createElement("option");
-            opt.text = (value as unknown) as string;
-            select.appendChild(opt);
+        const [start, end, step] = range;
+        if (step <= 0 || start > end) {
+            throw new Error(`${option.name}'s range is bad`);
         }
-        let default_value: string = option.value;
-        let index = 0;
-        for (let value = start; value <= end; value += step) {
-            const opt: HTMLOptionElement = select.options[index];
-            if (default_value == opt.text) {
-                opt.selected = true;
+
+        const span = document.createElement("span");
+        span.innerText = option.name;
+        const label = document.createElement("label");
+        label.htmlFor = controlId;
+        label.appendChild(span);
+
+        const select = document.createElement("select");
+        select.id = controlId;
+        const numberOfSteps = Math.floor((end - start) / step);
+        for (let index = 0; index <= numberOfSteps; index++) {
+            const value = Number((start + index * step).toFixed(1));
+            const displayValue = String(value);
+            select.add(new Option(displayValue, displayValue));
+        }
+
+        select.value = String(option.value);
+        container.append(label, select);
+
+        select.addEventListener("change", (event: Event) => {
+            const target = event.currentTarget;
+            if (!(target instanceof HTMLSelectElement)) {
+                throw new Error("The setting control must be a select element.");
             }
-            index++;
-        }
-        container.appendChild(select);
 
-        let self = this;
-        select.addEventListener(
-            "change",
-            (e: any) => {
-                let value = e.target.value;
-                self.presenter.setSelectedPatternSetting(option.name, value);
-            },
-            false
-        );
+            this.presenter.setSelectedPatternSetting(option.name, target.value);
+        });
     }
 }

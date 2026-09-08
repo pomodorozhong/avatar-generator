@@ -28,6 +28,12 @@ Create a production build in `dist`:
 npm run build
 ```
 
+Check the TypeScript without emitting compiled files:
+
+```sh
+npm run typecheck
+```
+
 The build command only creates the files in `dist`; it does not start a server.
 Preview the production build locally with:
 
